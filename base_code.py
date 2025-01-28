@@ -116,13 +116,6 @@ class MultiObjectiveLoss(nn.Module):
         """
         计算多目标损失。
 
-        参数：
-        - pred_noise: 预测的噪声，形状为 (batch_size, input_dim)
-        - true_noise: 真实的噪声，形状为 (batch_size, input_dim)
-        - Q_pred: 预测的Q值，形状为 (batch_size,)
-        - Q_true: 真实的Q值，形状为 (batch_size,)
-        - P_pred: 预测的P值，形状为 (batch_size,)
-        - P_true: 真实的P值，形状为 (batch_size,)
 
         返回：
         - loss: 综合损失值
@@ -266,10 +259,7 @@ class DDPM_MultiObjective(nn.Module):
         - t: 当前时间步，形状为 (batch_size,)
         - c: 条件信息，形状为 (batch_size, condition_dim)
 
-        返回：
-        - x_prev: 预测的x_{t-1}，形状为 (batch_size, input_dim)
-        - Q_prev: 预测的Q值，形状为 (batch_size, 1)
-        - P_prev: 预测的P值，形状为 (batch_size, 1)
+        
         """
         pred_noise, S_pred, P_pred = self.forward(xt, t, c)
         model_mean = self.s_posterior_mean(xt, t, c, pred_noise)
